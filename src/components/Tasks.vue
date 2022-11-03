@@ -18,19 +18,17 @@
 
   export default {
     name: "tasks",
-    props: {
-        tasks: {
-            type: Array,
-            default: []
-        }
-    },
-    methods: {
-        onClick() {
-            console.log("click");
-        }
-    },
     components: {
       Task
     },
-}
+    props: {
+      tasks: {
+        type: Array,
+        default: []
+      }
+    },
+    methods: {
+
+    },
+  }
 </script>

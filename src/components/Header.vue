@@ -2,7 +2,8 @@
   <header>
     <h1>{{ title }}</h1>
     <Button
-      :text="text"
+      :text="showAddTask ? 'Close' : text"
+      @toggle-add-task="$emit('toggle-add-task')"
     ></Button>
   </header>
 </template>
@@ -16,7 +17,8 @@
       title: {
         type: String,
         default: 'Hello World'
-      }
+      },
+      showAddTask: Boolean
     },
     components: {
       Button
