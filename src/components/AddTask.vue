@@ -59,11 +59,11 @@
         this.day = ''
         this.reminder = false
       },
-      nextId() {
-        const ids = this.tasks.map(task => task.id)
+      // nextId() {
+      //   const ids = this.tasks.map(task => task.id)
 
-        return Math.max(...ids) + 1
-      },
+      //   return Math.max(...ids) + 1
+      // },
       onSubmit(e) {
         e.preventDefault()
 
@@ -73,7 +73,7 @@
         }
 
         const newTask = {
-          id: this.nextId(),
+          // id: this.nextId(),
           text: this.text,
           day: this.day,
           reminder: this.reminder

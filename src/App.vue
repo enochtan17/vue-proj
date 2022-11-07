@@ -26,6 +26,8 @@ import Header from './components/Header'
 import Tasks from './components/Tasks'
 import AddTask from './components/AddTask'
 
+const api = 'http://localhost:5000/tasks'
+
 export default {
   name: 'App',
   components: {
@@ -39,11 +41,6 @@ export default {
     showAddTask: false
   }),
   methods: {
-    deleteTask(id) {
-      if (confirm('Are you sure?')) {
-        this.tasks = this.tasks.filter(task => task.id != id)
-      }
-    },
     toggleReminder(id) {
       this.tasks = this.tasks.map(task => {
         if (task.id == id) {
@@ -54,19 +51,49 @@ export default {
         } else return task
       })
     },
+    toggleAddTask() {
+      this.showAddTask = !this.showAddTask
+    },
     async fetchTasks() {
-      const res = await fetch('http://localhost:5000/tasks')
+      const res = await fetch(`${api}`)
 
       const data = await res.json()
 
       return data
     },
-    addTask(newTask) {
-      this.tasks = [...this.tasks, newTask]
+    async fetchTask(id) {
+      const res = await fetch(`${api}/${id}`)
+
+      const data = await res.json()
+
+      return data
     },
-    toggleAddTask() {
-      this.showAddTask = !this.showAddTask
-    }
+    async addTask(task) {
+      const res = await fetch(`${api}`, {
+        method: 'POST',
+        headers: {
+          'Content-type': 'application/json',
+        },
+        body: JSON.stringify(task)
+      })
+
+      const data = await res.json()
+
+      this.tasks = [...this.tasks, data]
+    },
+    async deleteTask(id) {
+      if (confirm('Are you sure?')) {
+        const res = await fetch(`${api}/{${id}}`, {
+          method: 'DELETE'
+        })
+
+        res.status === 200
+          ? this.tasks = this.tasks.filter(task => task.id !== id)
+          : alert('Error deleting task')
+
+        // this.tasks = this.tasks.filter(task => task.id != id)
+      }
+    },
   },
   async created() {
     this.tasks = await this.fetchTasks()
