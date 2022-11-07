@@ -83,15 +83,13 @@ export default {
     },
     async deleteTask(id) {
       if (confirm('Are you sure?')) {
-        const res = await fetch(`${api}/{${id}}`, {
+        const res = await fetch(`${api}/${id}`, {
           method: 'DELETE'
         })
 
         res.status === 200
-          ? this.tasks = this.tasks.filter(task => task.id !== id)
+          ? this.tasks = this.tasks.filter(task => task.id != id)
           : alert('Error deleting task')
-
-        // this.tasks = this.tasks.filter(task => task.id != id)
       }
     },
   },

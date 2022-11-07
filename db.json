@@ -17,12 +17,6 @@
       "text": "Food shopping",
       "day": "March 7th at 2:00pm",
       "reminder": false
-    },
-    {
-      "text": "qwer",
-      "day": "asdf",
-      "reminder": true,
-      "id": 4
     }
   ],
   "test": [
