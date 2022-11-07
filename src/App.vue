@@ -54,6 +54,13 @@ export default {
         } else return task
       })
     },
+    async fetchTasks() {
+      const res = await fetch('http://localhost:5000/tasks')
+
+      const data = await res.json()
+
+      return data
+    },
     addTask(newTask) {
       this.tasks = [...this.tasks, newTask]
     },
@@ -61,27 +68,8 @@ export default {
       this.showAddTask = !this.showAddTask
     }
   },
-  created() {
-    this.tasks = [
-      {
-        id: 1,
-        text: 'Groceries',
-        day: 'October 26',
-        reminder: true
-      },
-      {
-        id: 2,
-        text: 'Meeting',
-        day: 'November 3',
-        reminder: true
-      },
-      {
-        id: 3,
-        text: 'Pay rent',
-        day: 'December 1',
-        reminder: false
-      },
-    ]
+  async created() {
+    this.tasks = await this.fetchTasks()
   }
 }
 </script>
