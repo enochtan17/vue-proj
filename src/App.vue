@@ -9,8 +9,8 @@
       v-show="showAddTask"
     >
       <AddTask
-      :tasks="tasks"
-      @add-task="addTask"
+        :tasks="tasks"
+        @add-task="addTask"
       ></AddTask>
     </div>
     <Tasks
